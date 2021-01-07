@@ -1,0 +1,23 @@
+git init
+git reset    // desfaz um add
+git reset e2ee5f   // 7 ou todos characteres para voltar at� o escolhido
+git status
+clear
+ll 
+git add     // adiciona algum arquivo
+git add .   // adiciona tudo
+git diff    //mostra a diferen�a entre os arquivos
+git checkout aula1.txt  // desfaz arquivo antigo
+git commit -m "Com mensagem importante"     // adiciona arquivo ao repositorio, at� 50 caracteres
+git log       // mostra todos os commit
+git show HEAD    // mostra o �ltim commit
+git branch    // Mostra todas as branch e a sua que vc usa com *
+git branch nome_branch    // cria uma nova branch
+git checkout name_da_banch    // para ir pra outra branch
+git merge nome_branch    // junta a branch que vc t� com outra
+
+git remote add origin https://PauloBritoCN@bitbucket.org/jpksoftwares/projeto_servicenow.git     //reposit�rio
+git push -u origin master     // joga a branch MASTER no reposit�rio
+git push -u origin --all      // joga tudo no reposit�rio
+git pull                      // Atualiza o reposit�rio de acordo com o que tem na nuvem, recomendado fazer antes de cada commit na nuvem (push)
+git clone https://PauloBritoCN@bitbucket.org/jpksoftwares/projeto_servicenow.git
