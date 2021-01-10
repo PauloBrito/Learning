@@ -1,7 +1,11 @@
 package com.algaworks.cobranca.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,7 +24,6 @@ public class TituloController {
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
-		modelView.addObject("todosStatus", StatusTitulo.values());
 		return modelView;
 	}
 
@@ -29,10 +32,14 @@ public class TituloController {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
 		// TODO salvar no banco de dados	
 		titulos.save(titulo);
-		modelView.addObject("mensagem", "Salvo com Sucesso!");
+		modelView.addObject("mensagem", "Salvo com sucesso!");
 		return modelView;
 	}
 	
+	@ModelAttribute("todosStatusTitulo")
+	public List<StatusTitulo> StatusTitulo(){
+		return Arrays.asList(StatusTitulo.values());
+	}
 	
 
 }

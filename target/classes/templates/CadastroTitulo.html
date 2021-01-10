@@ -27,12 +27,9 @@
 			th:if="${!#strings.isEmpty(mensagem)}">
 			<button type="button" class="btn-close" aria-label="Close"
 				data-dimiss="alert"></button>
-			<h4 class="alert-heading" th:text=${mensagem}>Salvo com Sucesso?</h4>
+			<h4 class="alert-heading" th:text=${mensagem}>Salvo com sucesso?</h4>
 			<p>Aww yeah, you successfully read this important alert message.
 				This example text is going to run a bit longer so that you can see</p>
-			<hr>
-			<p class="mb-0">Whenever you need to, be sure to use margin
-				utilities to keep things nice and tidy.</p>
 		</div>
 
 
@@ -59,7 +56,7 @@
 					<span class="input-group-text" id="basic-addon1">Status</span> <select
 						class="form-select" aria-label="Default select example"
 						name="status" id="status">
-						<option th:each="status:${todosStatus}" th:value="${status}"
+						<option th:each="status:${todosStatusTitulo}" th:value="${status}"
 							th:text="${status.descricao}"></option>
 					</select>
 				</div>
