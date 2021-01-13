@@ -15,6 +15,8 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 public class Titulo {
@@ -25,10 +27,12 @@ public class Titulo {
 
 	private String descricao;
 	
+
 	//@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
 	//@JsonFormat(pattern="yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	
 	private Date dataVencimento;
 
 	@Enumerated(EnumType.STRING)

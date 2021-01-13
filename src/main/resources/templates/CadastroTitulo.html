@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="https://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="LayoutPadrao">
 
 
 <head>
 <meta charset="UTF-8"></meta>
 <title>Cadastro Título</title>
-<link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-<link href="/css/style.css" type="text/css" rel="stylesheet">
 </head>
-<body>
-	<!-- Image and text -->
-	<nav class="navbar navbar-light bg-light">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"> <img
-				src="/images/bootstrap-logo.svg" alt="" width="30" height="24"
-				class="d-inline-block align-top"> Algaworks
-			</a>
-		</div>
-	</nav>
 
+<section layout:fragment="conteudo">
 
 	<form class="form-horizontal" method="POST" action="/titulos">
-
 		<div class="alert alert-success alert-dismissible"
 			th:if="${!#strings.isEmpty(mensagem)}">
-			<button type="button" class="btn-close" aria-label="Close"
-				data-dimiss="alert"></button>
+			<button type="button" class="btn btn-close" aria-label="Close"
+				data-dismiss="alert"></button>
 			<h4 class="alert-heading" th:text=${mensagem}>Salvo com sucesso?</h4>
 			<p>Aww yeah, you successfully read this important alert message.
 				This example text is going to run a bit longer so that you can see</p>
 		</div>
 
-
 		<div class="card">
-			<h5 class="card-header">Novo Título</h5>
+			<div class="card-header">
+				<h4 class="text-center" style="padding-top: 6px">Cadastro de títulos</h4>
+
+				<ul class="nav nav-tabs card-header-tabs">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="true" href="/titulos/novo">Cadastrar</a></li>
+					<li class="nav-item"><a class="nav-link" href="/titulos">Pesquisar</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#"
+						tabindex="-1" aria-disabled="true">Editar</a></li>
+				</ul>
+			</div>
 			<div class="card-body">
 
 				<div class="input-group mb-3">
@@ -74,6 +73,5 @@
 		</div>
 	</form>
 
-	<script src="/js/bootstrap.bundle.min.js"></script>
-</body>
+</section>
 </html>

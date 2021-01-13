@@ -26,6 +26,14 @@ public class TituloController {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
 		return modelView;
 	}
+	
+	@RequestMapping
+	public ModelAndView pesquisar() {
+		ModelAndView modelView = new ModelAndView("PesquisaTitulo");
+		List<Titulo> todosTitulos = titulos.findAll();
+		modelView.addObject("todosTitulos", todosTitulos);
+		return modelView;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView salvar(Titulo titulo) {
