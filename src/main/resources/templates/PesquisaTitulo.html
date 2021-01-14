@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="LayoutPadrao">
+
+
+<head>
+<meta charset="UTF-8"></meta>
+<title>Pesquisar de títulos</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<div class="card">
+		<div class="card-header">
+			<h4 class="text-center" style="padding-top: 6px">Pesquisa de
+				títulos</h4>
+
+			<ul class="nav nav-tabs card-header-tabs">
+				<li class="nav-item"><a class="nav-link" href="/titulos/novo">Cadastrar</a></li>
+				<li class="nav-item"><a class="nav-link active"
+					aria-current="true" href="/titulos">Pesquisar</a></li>
+				<li class="nav-item"><a class="nav-link disabled" href="#"
+					tabindex="-1" aria-disabled="true">Editar</a></li>
+			</ul>
+		</div>
+		<div class="card-body">
+			<table class="table table-bordered table-striped">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col" class="text-center col-md-1">#</th>
+						<th scope="col">Descrição</th>
+						<th scope="col">Data</th>
+						<th scope="col">Valor</th>
+						<th scope="col" class="text-center col-md-2">Status</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="titulo : ${todosTitulos}">
+						<td scope="row" class="text-center" th:text="${titulo.id}"></td>
+						<td th:text="${titulo.descricao}"></td>
+						<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
+						<td class="text-right" th:text="${titulo.valor}"></td>
+						<td class="text-center" th:text="${titulo.status.descricao}"></td>
+						<td class="text-center"></td>
+					</tr>
+					<tr>
+					<td colspan="6" th:if="${#lists.isEmpty(todosTitulos)}">Nenhum título foi encontrado</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+</html>
