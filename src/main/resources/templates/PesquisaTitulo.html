@@ -20,8 +20,7 @@
 				<li class="nav-item"><a class="nav-link" href="/titulos/novo">Cadastrar</a></li>
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="true" href="/titulos">Pesquisar</a></li>
-				<li class="nav-item"><a class="nav-link disabled" href="#"
-					tabindex="-1" aria-disabled="true">Editar</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Editar</a></li>
 			</ul>
 		</div>
 		<div class="card-body">
@@ -41,12 +40,15 @@
 						<td scope="row" class="text-center" th:text="${titulo.id}"></td>
 						<td th:text="${titulo.descricao}"></td>
 						<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
-						<td class="text-right" th:text="${titulo.valor}"></td>
-						<td class="text-center" th:text="${titulo.status.descricao}"></td>
+						<td class="text-right" th:text="${{titulo.valor}}"></td>
+						<td class="text-center"><span class="badge rounded-pill"
+							th:text="${titulo.status.descricao}"
+							th:classappend="${titulo.isPendente ? 'bg-danger': titulo.isRecebido ? 'bg-success': 'bg-warning text-dark'}"></span></td>
 						<td class="text-center"></td>
 					</tr>
 					<tr>
-					<td colspan="6" th:if="${#lists.isEmpty(todosTitulos)}">Nenhum título foi encontrado</td>
+						<td colspan="6" th:if="${#lists.isEmpty(todosTitulos)}">Nenhum
+							título foi encontrado</td>
 					</tr>
 
 				</tbody>

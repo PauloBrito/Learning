@@ -17,7 +17,6 @@ import org.springframework.format.annotation.NumberFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
 @Entity
 public class Titulo {
 
@@ -26,19 +25,18 @@ public class Titulo {
 	private Long id;
 
 	private String descricao;
-	
 
-	//@DateTimeFormat(pattern = "dd/MM/yyyy")
+	// @DateTimeFormat(pattern = "dd/MM/yyyy")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	//@JsonFormat(pattern="yyyy-MM-dd")
+	// @JsonFormat(pattern="yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
-	
+
 	private Date dataVencimento;
 
 	@Enumerated(EnumType.STRING)
-	private StatusTitulo status;	
-	
-	@NumberFormat(pattern = "##,#00.0")
+	private StatusTitulo status;
+
+	@NumberFormat(pattern = "R$ ##,#00.00")
 	private BigDecimal valor;
 
 	public Long getId() {
@@ -87,6 +85,14 @@ public class Titulo {
 		this.valor = valor;
 	}
 
+	public boolean isPendente() {
+		return StatusTitulo.PENDENTE.equals(this.status);
+	}
+	
+	public boolean isRecebido() {
+		return StatusTitulo.RECEBIDO.equals(this.status);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,6 +116,6 @@ public class Titulo {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
 
 }
