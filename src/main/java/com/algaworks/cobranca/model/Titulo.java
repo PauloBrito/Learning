@@ -11,11 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Titulo {
@@ -24,19 +23,24 @@ public class Titulo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull(message = "Escreva alguma descrição")
 	private String descricao;
 
 	// @DateTimeFormat(pattern = "dd/MM/yyyy")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	// @JsonFormat(pattern="yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
-
+	@NotNull(message = "Escolha uma data de vencimento")
 	private Date dataVencimento;
 
+	
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private StatusTitulo status;
 
+	
 	@NumberFormat(pattern = "R$ ##,#00.00")
+	@NotNull(message = "Valor não pode ser nulo")
 	private BigDecimal valor;
 
 	public Long getId() {
