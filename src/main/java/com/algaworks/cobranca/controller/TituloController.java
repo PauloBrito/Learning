@@ -20,6 +20,7 @@ import com.algaworks.cobranca.repository.Titulos;
 @Controller
 @RequestMapping("/titulos")
 public class TituloController {
+	Object pagina;
 
 	@Autowired
 	private Titulos titulos;
@@ -28,13 +29,31 @@ public class TituloController {
 	public ModelAndView novo() {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
 		modelView.addObject(new Titulo());
+	
+		pagina = "CadastroTitulo";
+		modelView.addObject("pagina" , pagina);
+		return modelView;
+	}
+	
+	@RequestMapping("/excluir")
+	public ModelAndView excluir() {
+		titulos.deleteAll();
+		ModelAndView modelView = new ModelAndView("CadastroTitulo");
+		modelView.addObject(new Titulo());
+	
+		pagina = "CadastroTitulo";
+		modelView.addObject("pagina" , pagina);
+		
 		return modelView;
 	}
 
 	@RequestMapping
 	public ModelAndView pesquisar() {
-		ModelAndView modelView = new ModelAndView("PesquisaTitulo");
+		ModelAndView modelView = new ModelAndView("PesquisarTitulo");
+		
 		List<Titulo> todosTitulos = titulos.findAll();
+		pagina = "PesquisarTitulo";
+		modelView.addObject("pagina" , pagina);
 		modelView.addObject("todosTitulos", todosTitulos);
 		return modelView;
 	}
@@ -42,6 +61,8 @@ public class TituloController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView salvar(@Validated Titulo titulo, Errors errors) {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
+		pagina = "CadastroTitulo";
+		modelView.addObject("pagina" , pagina);
 		if(errors.hasErrors()) {
 			return modelView;
 		}

@@ -14,36 +14,18 @@
 
 	<form class="form-horizontal" method="POST" action="/titulos"
 		th:object="${titulo}">
-		<div class="alert alert-success alert-dismissible"
-			th:if="${!#strings.isEmpty(mensagem)}">
-			<button type="button" class="btn btn-close" aria-label="Close"
-				data-dismiss="alert"></button>
-			<h4 class="alert-heading" th:text=${mensagem}>Salvo com sucesso?</h4>
-			<p>Aww yeah, you successfully read this important alert message.</p>
-		</div>
 
-		<div class="alert alert-danger alert-dismissible"
-			th:if="${#fields.hasAnyErrors()}">
-			<button type="button" class="btn btn-close" aria-label="Close"
-				data-dismiss="alert"></button>
-			<h4 class="alert-heading">Erro!</h4>
-			<div th:each="detailedError : ${#fields.detailedErrors()}">
-				<span th:text="${detailedError.message}">a</span>
-			</div>
+		<div layout:insert="Mensagem"></div>
 
-		</div>
 
 		<div class="card">
 			<div class="card-header">
 				<h4 class="text-center" style="padding-top: 6px">Cadastro de
 					títulos</h4>
 
-				<ul class="nav nav-tabs card-header-tabs">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="true" href="/titulos/novo">Cadastrar</a></li>
-					<li class="nav-item"><a class="nav-link" href="/titulos">Pesquisar</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Editar</a></li>
-				</ul>
+				<div layout:insert="Menu"></div>				
+				 
+
 			</div>
 			<div class="card-body">
 
@@ -72,11 +54,11 @@
 				</div>
 
 				<div class="input-group mb-3"
-					th:classappend="${#fields.hasErrors('valor')} ? is-invalid">					
+					th:classappend="${#fields.hasErrors('valor')} ? is-invalid">
 					<span class="input-group-text">Valor</span> <input type="text"
 						class="form-control" aria-label="Amount (to the nearest dollar)"
 						name="valor" id="valor"> <span class="input-group-text">R$</span>
-					
+
 				</div>
 				<div class="col-auto">
 					<button type="submit" class="btn btn-primary">Salvar</button>
