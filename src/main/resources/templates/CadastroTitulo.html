@@ -17,51 +17,65 @@
 
 		<div layout:insert="Mensagem"></div>
 
-
 		<div class="card">
 			<div class="card-header">
 				<h4 class="text-center" style="padding-top: 6px">Cadastro de
 					títulos</h4>
 
-				<div layout:insert="Menu"></div>				
-				 
+				<div layout:insert="Menu"></div>
+
 
 			</div>
-			<div class="card-body">
 
-				<div class="input-group mb-3">
-					<span class="input-group-text">Descrição</span>
-					<textarea class="form-control" aria-label="With textarea"
-						name="descricao" id="descricao"></textarea>
+			<div class="card-body row g-3">
+
+				<div class="col-md-4">
+					<label for="valor" class="form-label">Valor:</label>
+					<div class="input-group has-validation">
+						<span class="input-group-text" id="dataVencimento">R$</span> <input
+							type="text" class="form-control" th:field="*{valor}" id="valor"
+							th:classappend="${#fields.hasErrors('valor')} ? is-invalid">
+						<div id="validationServerUsernameFeedback"
+							class="invalid-feedback">Por favor, escolha um valor.</div>
+						<div class="valid-feedback">Ótimo!</div>
+					</div>
 				</div>
-
-				<div class="input-group mb-3">
-					<input type="date" class="form-control"
-						placeholder="Recipient's username"
-						aria-label="Recipient's username" aria-describedby="basic-addon2"
-						name="dataVencimento" id="dataVencimento"> <span
-						class="input-group-text" id="basic-addon2">Data de
-						Vencimento</span>
-				</div>
-
-				<div class="input-group mb-3">
-					<span class="input-group-text" id="basic-addon1">Status</span> <select
-						class="form-select" aria-label="Default select example"
-						name="status" id="status">
+				<div class="col-md-4">
+					<label for="status" class="form-label">Status:</label> <select
+						class="form-select text" aria-label="Default select example"
+						th:field="*{status}" id="status">
 						<option th:each="status:${todosStatusTitulo}" th:value="${status}"
 							th:text="${status.descricao}"></option>
 					</select>
+					<div id="validationServerUsernameFeedback" class="invalid-feedback">Por
+						favor, escolha um Status.</div>
+					<div class="valid-feedback">Ótimo!</div>
+				</div>
+				<div class="col-md-4">
+					<label for="dataVencimento" class="form-label">Data de
+						vencimento:</label> <input type="date" class="form-control"
+						id="dataVencimento" th:field="*{dataVencimento}"
+						aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
+						th:classappend="${#fields.hasErrors('dataVencimento')} ? is-invalid">
+					<div id="validationServerUsernameFeedback" class="invalid-feedback">Por
+						favor, escolha um vencimento.</div>
+					<div class="valid-feedback">Ótimo!</div>
+
+				</div>
+				<div class="col-md-12">
+					<label for="validationServer03" class="form-label">Descrição:</label>
+
+					<textarea class="form-control" aria-label="With textarea"
+						th:field="*{descricao}" id="descricao"
+						aria-describedby="validationServer03Feedback"
+						th:classappend="${#fields.hasErrors('descricao')} ? is-invalid"></textarea>
+					<div id="validationServer03Feedback" class="invalid-feedback">Por
+						favor, digite uma descrição.</div>
+					<div class="valid-feedback">Ótimo!</div>
 				</div>
 
-				<div class="input-group mb-3"
-					th:classappend="${#fields.hasErrors('valor')} ? is-invalid">
-					<span class="input-group-text">Valor</span> <input type="text"
-						class="form-control" aria-label="Amount (to the nearest dollar)"
-						name="valor" id="valor"> <span class="input-group-text">R$</span>
-
-				</div>
-				<div class="col-auto">
-					<button type="submit" class="btn btn-primary">Salvar</button>
+				<div class="col-12">
+					<button class="btn btn-primary" type="submit">Salvar</button>
 				</div>
 
 			</div>
