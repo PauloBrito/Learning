@@ -36,16 +36,15 @@ public class TituloController {
 		return modelView;
 	}
 
-	@RequestMapping("/excluir")
-	public ModelAndView excluir() {
-		titulos.deleteAll();
-		ModelAndView modelView = new ModelAndView("CadastroTitulo");
-		modelView.addObject(new Titulo());
+	@RequestMapping(value="/excluir/{id}", method = RequestMethod.POST)
+	public String excluir(@PathVariable Long id, RedirectAttributes attributes) {
+		 
+		 titulos.deleteById(id);
+		 ModelAndView modelView = new ModelAndView("PesquisarTitulo");
 
-		pagina = "CadastroTitulo";
-		modelView.addObject("pagina", pagina);
-
-		return modelView;
+			pagina = "PesquisarTitulo";			
+			attributes.addFlashAttribute("pagina", pagina);
+			return "redirect:/titulos";
 	}
 
 	@RequestMapping
@@ -59,7 +58,7 @@ public class TituloController {
 		return modelView;
 	}
 
-	@RequestMapping("{id}")
+	@RequestMapping("/editar/{id}")
 	public ModelAndView edidar(@PathVariable("id") Titulo titulo) {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
 		pagina = "EditarTitulo";
@@ -82,6 +81,7 @@ public class TituloController {
 		attributes.addFlashAttribute("pagina", pagina);
 		return "redirect:/titulos/novo";
 	}
+	
 
 	@ModelAttribute("todosStatusTitulo")
 	public List<StatusTitulo> StatusTitulo() {
