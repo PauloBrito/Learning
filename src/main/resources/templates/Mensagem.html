@@ -7,7 +7,7 @@
 <div class="alert alert-success alert-dismissible"
 	th:if="${!#strings.isEmpty(mensagem)}">
 	<button type="button" class="btn btn-close" aria-label="Close"
-		data-dismiss="alert"></button>
+		data-bs-dismiss="alert"></button>
 	<h4 class="alert-heading" th:text=${mensagem}>Salvo com sucesso?</h4>
 	<p>Aww yeah, you successfully read this important alert message.</p>
 </div>
@@ -15,7 +15,7 @@
 <div class="alert alert-danger alert-dismissible"
 	th:if="${#fields.hasAnyErrors()}">
 	<button type="button" class="btn btn-close" aria-label="Close"
-		data-dismiss="alert"></button>
+		data-bs-dismiss="alert"></button>
 	<h4 class="alert-heading">Atenção!</h4>
 	<div th:each="detailedError : ${#fields.detailedErrors()}">
 		<span th:text="${detailedError.message}">a</span>

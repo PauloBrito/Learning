@@ -14,7 +14,8 @@
 
 	<form class="form-horizontal" method="POST" action="/titulos"
 		th:object="${titulo}">
-
+		
+		
 		<div layout:insert="Mensagem"></div>
 
 		<div class="card">
@@ -28,6 +29,8 @@
 			</div>
 
 			<div class="card-body row g-3">
+			
+			<input type="hidden" th:field="*{id}"></input>
 
 				<div class="col-md-4">
 					<label for="valor" class="form-label">Valor:</label>
@@ -81,6 +84,7 @@
 			</div>
 		</div>
 	</form>
+	
 
 </section>
 </html>

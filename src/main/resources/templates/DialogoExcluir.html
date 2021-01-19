@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalExcluir" tabindex="-1"
+	aria-labelledby="ModalExcluir" aria-hidden="true">
+	<div class="modal-dialog">
+		<form action="POST">
+		<input type="hidden" name="_method" value="DELETE"></input>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Você tem
+						certeza?</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">Deseja pagar este título?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-danger">Sim, excluir</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+</html>

@@ -40,16 +40,29 @@
 						<td class="text-center"><span class="badge rounded-pill"
 							th:text="${titulo.status.descricao}"
 							th:classappend="${titulo.isPendente ? 'bg-danger': titulo.isRecebido ? 'bg-success': 'bg-warning text-dark'}"></span></td>
-						<td class="text-center"></td>
+						<td class="text-center"><a class="btn btn-link btn-xs"
+							th:href="@{/titulos/{id}(id=${titulo.id})}"> <img
+								name="Editar" aria-label="Editar" src="/images/edit-24px.svg"></img>
+						</a> <a class="btn btn-link btn-xs" data-bs-toggle="modal"
+	data-bs-target="#ModalExcluir"> <img name="Deletar"
+								aria-label="Deletar" src="/images/delete-24px.svg"></img>
+						</a></td>
 					</tr>
 					<tr>
 						<td colspan="6" th:if="${#lists.isEmpty(todosTitulos)}">Nenhum
 							título foi encontrado</td>
 					</tr>
 
+
 				</tbody>
 			</table>
+
+			<div layout:insert="DialogoExcluir"></div>
+
 		</div>
 	</div>
+
+
+
 </section>
 </html>
