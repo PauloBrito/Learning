@@ -8,7 +8,7 @@
 <div class="modal fade" id="ModalExcluir" tabindex="-1"
 	aria-labelledby="ModalExcluir" aria-hidden="true">
 	<div class="modal-dialog">
-		<form action="/titulos/excluir/42" method="POST">
+		<form th:attr="data-url-base='/titulos/excluir/'" method="POST">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Você tem
@@ -16,7 +16,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body">Deseja pagar este título?</div>
+				<div class="modal-body"><span>Deseja pagar este título?</span></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">Cancelar</button>

@@ -36,15 +36,15 @@ public class TituloController {
 		return modelView;
 	}
 
-	@RequestMapping(value="/excluir/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/excluir/{id}", method = RequestMethod.POST)
 	public String excluir(@PathVariable Long id, RedirectAttributes attributes) {
-		 
-		 titulos.deleteById(id);
-		 ModelAndView modelView = new ModelAndView("PesquisarTitulo");
 
-			pagina = "PesquisarTitulo";			
-			attributes.addFlashAttribute("pagina", pagina);
-			return "redirect:/titulos";
+		titulos.deleteById(id);
+
+		pagina = "PesquisarTitulo";
+		attributes.addFlashAttribute("pagina", pagina);
+		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
+		return "redirect:/titulos";
 	}
 
 	@RequestMapping
@@ -68,20 +68,23 @@ public class TituloController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes attributes) {
+	public ModelAndView salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes attributes) {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
 		pagina = "CadastroTitulo";
 		if (errors.hasErrors()) {
-			return "CadastroTitulo";
+			modelView.addObject("pagina", pagina);
+			return modelView;
 		}
 
-		// TODO salvar no banco de dados
 		titulos.save(titulo);
-		attributes.addFlashAttribute("mensagem", "Salvo com sucesso!");
-		attributes.addFlashAttribute("pagina", pagina);
-		return "redirect:/titulos/novo";
-	}
+		titulo = new Titulo();
+		modelView = new ModelAndView("CadastroTitulo");
+		modelView.addObject(titulo);
+		modelView.addObject("pagina", pagina);
+		modelView.addObject("mensagem", "Salvo com sucesso!");
 	
+		return modelView;
+	}
 
 	@ModelAttribute("todosStatusTitulo")
 	public List<StatusTitulo> StatusTitulo() {

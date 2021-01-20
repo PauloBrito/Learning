@@ -8,13 +8,19 @@
 <head>
 <meta charset="UTF-8"></meta>
 <title>Pesquisar de títulos</title>
+
+
 </head>
 
 <section layout:fragment="conteudo">
+
+	<div layout:insert="Mensagem"></div>
+	
 	<div class="card">
 		<div class="card-header">
 			<h4 class="text-center" style="padding-top: 6px">Pesquisa de
 				títulos</h4>
+
 
 			<div layout:insert="Menu"></div>
 
@@ -44,8 +50,10 @@
 							th:href="@{/titulos/editar/{id}(id=${titulo.id})}"> <img
 								name="Editar" aria-label="Editar" src="/images/edit-24px.svg"></img>
 						</a> <a class="btn btn-link btn-xs" data-bs-toggle="modal"
-							data-bs-target="#ModalExcluir"> <img name="Deletar"
-								aria-label="Deletar" src="/images/delete-24px.svg"></img>
+							data-bs-target="#ModalExcluir"
+							th:attr="data-id=${titulo.id}, data-descricao=${titulo.descricao}">
+								<img name="Deletar" aria-label="Deletar"
+								src="/images/delete-24px.svg"></img>
 						</a></td>
 					</tr>
 					<tr>
@@ -56,8 +64,8 @@
 
 				</tbody>
 			</table>
-
 			<div layout:insert="DialogoExcluir"></div>
+			<script src="/js/cobranca.js"></script>
 
 		</div>
 	</div>
