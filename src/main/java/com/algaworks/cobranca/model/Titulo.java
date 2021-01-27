@@ -31,8 +31,8 @@ public class Titulo {
 	@Size(max = 60 , message = "Descrição não pode conter mais de 60 caracteres")
 	private String descricao;
 
-	// @DateTimeFormat(pattern = "dd/MM/yyyy")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	//@DateTimeFormat(pattern = "yyyy/MM/dd")
 	// @JsonFormat(pattern="yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	@NotNull(message = "Data de vencimento é obrigatória")
@@ -44,7 +44,7 @@ public class Titulo {
 	private StatusTitulo status;
 
 	
-	@NumberFormat(pattern = "R$ ##,#00.00")
+	@NumberFormat(pattern = "##,#00.00")
 	@NotNull(message = "Valor é obrigatório")
 	@DecimalMax(value = "999999999.99", message = "Valor não pode ser mais que 1 bilhão")
 	@DecimalMin(value = "0.99", message = "Valor não pode ser menor que 1 real")

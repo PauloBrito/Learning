@@ -10,8 +10,13 @@ $('#ModalExcluir').on('show.bs.modal', function(event) {
 	var action = form.data('url-base');
 
 	form.attr('action', action + codigoTitulo);
-	
-	modal.find('.modal-body span').html('Deseja pagar o título <strong>' + 
-	descricaoTitulo + '</strong> ?');
 
+	modal.find('.modal-body span').html('Deseja pagar o título <strong>' +
+		descricaoTitulo + '</strong> ?');
+
+});
+
+$(function() {
+
+	$('.js-currency').maskMoney({ decimal: ',', thousands: '.', allowZero: true });
 });

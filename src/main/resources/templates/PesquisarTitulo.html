@@ -15,7 +15,7 @@
 <section layout:fragment="conteudo">
 
 	<div layout:insert="Mensagem"></div>
-	
+
 	<div class="card">
 		<div class="card-header">
 			<h4 class="text-center" style="padding-top: 6px">Pesquisa de
@@ -42,18 +42,21 @@
 						<td scope="row" class="text-center" th:text="${titulo.id}"></td>
 						<td th:text="${titulo.descricao}"></td>
 						<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
-						<td class="text-right" th:text="${{titulo.valor}}"></td>
+						<td class="text-right" th:text="${{'R$ '+titulo.valor}}"></td>
 						<td class="text-center"><span class="badge rounded-pill"
 							th:text="${titulo.status.descricao}"
 							th:classappend="${titulo.isPendente ? 'bg-danger': titulo.isRecebido ? 'bg-success': 'bg-warning text-dark'}"></span></td>
-						<td class="text-center"><a class="btn btn-link btn-xs"
-							th:href="@{/titulos/editar/{id}(id=${titulo.id})}"> <img
-								name="Editar" aria-label="Editar" src="/images/edit-24px.svg"></img>
-						</a> <a class="btn btn-link btn-xs" data-bs-toggle="modal"
+						<td class="text-center">
+						<a class="btn btn-link btn-xs"
+							th:href="@{/titulos/editar/{id}(id=${titulo.id})}" title="Editar"
+							data-bs-placement="top" rel="tooltip"> 
+							<img src="/images/edit-24px.svg">
+						</a> 
+						<a class="btn btn-link btn-xs" data-bs-toggle="modal"
 							data-bs-target="#ModalExcluir"
-							th:attr="data-id=${titulo.id}, data-descricao=${titulo.descricao}">
-								<img name="Deletar" aria-label="Deletar"
-								src="/images/delete-24px.svg"></img>
+							th:attr="data-id=${titulo.id}, data-descricao=${titulo.descricao}"
+							title="Deletar" rel="tooltip" data-bs-placement="top"> 
+							<img src="/images/delete-24px.svg">
 						</a></td>
 					</tr>
 					<tr>

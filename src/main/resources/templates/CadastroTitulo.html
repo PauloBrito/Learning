@@ -8,6 +8,13 @@
 <head>
 <meta charset="UTF-8"></meta>
 <title>Cadastro Título</title>
+
+<link href="/css/bootstrap-datepicker.standalone.min.css"
+	type="text/css" rel="stylesheet">
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/bootstrap-datepicker.pt-BR.min.js"></script>
+<script src="/js/jquery.maskMoney.min.js"></script>
+<script src="/js/cobranca.js"></script>
 </head>
 
 <section layout:fragment="conteudo">
@@ -36,8 +43,9 @@
 				<div class="col-md-4">
 					<label for="valor" class="form-label">Valor:</label>
 					<div class="input-group has-validation">
-						<span class="input-group-text" id="dataVencimento">R$</span> <input
-							type="text" class="form-control" th:field="*{valor}" id="valor"
+						<span class="input-group-text">R$</span> 
+						<input type="text"
+							class="form-control js-currency" th:field="*{valor}" id="valor"
 							th:classappend="${#fields.hasErrors('valor')} ? is-invalid">
 						<div id="validationServerUsernameFeedback"
 							class="invalid-feedback">Por favor, escolha um valor.</div>
@@ -57,10 +65,13 @@
 				</div>
 				<div class="col-md-4">
 					<label for="dataVencimento" class="form-label">Data de
-						vencimento:</label> <input type="date" class="form-control"
+						vencimento:</label> <input type="text" class="form-control"
 						id="dataVencimento" th:field="*{dataVencimento}"
 						aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
-						th:classappend="${#fields.hasErrors('dataVencimento')} ? is-invalid">
+						th:classappend="${#fields.hasErrors('dataVencimento')} ? is-invalid"
+						data-provide="datepicker" data-date-format="dd/mm/yyyy"
+						data-date-language="pt-BR" data-date-autoclose="true"
+						data-date-today-highlight="true" data-date-orientation="bottom">
 					<div id="validationServerUsernameFeedback" class="invalid-feedback">Por
 						favor, escolha um vencimento.</div>
 					<div class="valid-feedback">Ótimo!</div>
@@ -85,6 +96,7 @@
 			</div>
 		</div>
 	</form>
+
 
 
 </section>
