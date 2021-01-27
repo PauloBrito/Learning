@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="UTF-8"></meta>
-<title>Cadastro Título</title>
+<title th:text=${pagina}>Cadastro Título</title>
 
 <link href="/css/bootstrap-datepicker.standalone.min.css"
 	type="text/css" rel="stylesheet">
@@ -28,8 +28,8 @@
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="text-center" style="padding-top: 6px">Cadastro de
-					títulos</h4>
+				<h4 class="text-center" style="padding-top: 6px"
+					th:text=${pagina}>Cadastro de títulos</h4>
 
 				<div layout:insert="Menu"></div>
 
@@ -43,8 +43,7 @@
 				<div class="col-md-4">
 					<label for="valor" class="form-label">Valor:</label>
 					<div class="input-group has-validation">
-						<span class="input-group-text">R$</span> 
-						<input type="text"
+						<span class="input-group-text">R$</span> <input type="text"
 							class="form-control js-currency" th:field="*{valor}" id="valor"
 							th:classappend="${#fields.hasErrors('valor')} ? is-invalid">
 						<div id="validationServerUsernameFeedback"

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.algaworks.cobranca.controller.service.TituloService;
 import com.algaworks.cobranca.model.StatusTitulo;
 import com.algaworks.cobranca.model.Titulo;
 import com.algaworks.cobranca.repository.Titulos;
@@ -22,28 +23,31 @@ import com.algaworks.cobranca.repository.Titulos;
 @Controller
 @RequestMapping("/titulos")
 public class TituloController {
-	Object pagina;
+	Object nomePagina;
 
 	@Autowired
 	private Titulos titulos;
+	
+	@Autowired
+	private TituloService tituloService;
 
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
 		modelView.addObject(new Titulo());
 
-		pagina = "CadastroTitulo";
-		modelView.addObject("pagina", pagina);
+		nomePagina = "Cadastro de Título";
+		modelView.addObject("pagina", nomePagina);
 		return modelView;
 	}
 
 	@RequestMapping(value = "/excluir/{id}", method = RequestMethod.POST)
 	public String excluir(@PathVariable Long id, RedirectAttributes attributes) {
 
-		titulos.deleteById(id);
+		tituloService.excluir(id);	
 
-		pagina = "PesquisarTitulo";
-		attributes.addFlashAttribute("pagina", pagina);
+		nomePagina = "Excluir Título";
+		attributes.addFlashAttribute("pagina", nomePagina);
 		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
 		return "redirect:/titulos";
 	}
@@ -53,8 +57,8 @@ public class TituloController {
 		ModelAndView modelView = new ModelAndView("PesquisarTitulo");
 
 		List<Titulo> todosTitulos = titulos.findAll();
-		pagina = "PesquisarTitulo";
-		modelView.addObject("pagina", pagina);
+		nomePagina = "Pesquisa de Títulos";
+		modelView.addObject("pagina", nomePagina);
 		modelView.addObject("todosTitulos", todosTitulos);
 		return modelView;
 	}
@@ -62,8 +66,8 @@ public class TituloController {
 	@RequestMapping("/editar/{id}")
 	public ModelAndView edidar(@PathVariable("id") Titulo titulo) {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
-		pagina = "EditarTitulo";
-		modelView.addObject("pagina", pagina);
+		nomePagina = "Editar Título";
+		modelView.addObject("pagina", nomePagina);
 		modelView.addObject(titulo);
 		return modelView;
 	}
@@ -71,21 +75,21 @@ public class TituloController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes attributes) {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
-		pagina = "CadastroTitulo";
+		nomePagina = "CadastroTitulo";
 		if (errors.hasErrors()) {
-			modelView.addObject("pagina", pagina);
+			modelView.addObject("pagina", nomePagina);
 			return modelView;
 		}
 		try {
 			
-			titulos.save(titulo);
+			tituloService.salvar(titulo);
 			titulo = new Titulo();
 			modelView = new ModelAndView("CadastroTitulo");
 			modelView.addObject(titulo);
-			modelView.addObject("pagina", pagina);
+			modelView.addObject("pagina", nomePagina);
 			modelView.addObject("mensagem", "Salvo com sucesso!");
-		} catch (DataIntegrityViolationException e) {
-			errors.rejectValue("dataVencimento",null, "Formato de data inválido");
+		} catch (IllegalArgumentException e) {
+			errors.rejectValue("dataVencimento",null, e.getMessage());
 		}
 
 		return modelView;

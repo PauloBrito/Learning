@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="UTF-8"></meta>
-<title>Pesquisar de títulos</title>
+<title th:text=${pagina}>Pesquisar de títulos</title>
 
 
 </head>
@@ -18,7 +18,7 @@
 
 	<div class="card">
 		<div class="card-header">
-			<h4 class="text-center" style="padding-top: 6px">Pesquisa de
+			<h4 class="text-center" style="padding-top: 6px" th:text=${pagina}>Pesquisa de
 				títulos</h4>
 
 
@@ -46,17 +46,15 @@
 						<td class="text-center"><span class="badge rounded-pill"
 							th:text="${titulo.status.descricao}"
 							th:classappend="${titulo.isPendente ? 'bg-danger': titulo.isRecebido ? 'bg-success': 'bg-warning text-dark'}"></span></td>
-						<td class="text-center">
-						<a class="btn btn-link btn-xs"
+						<td class="text-center"><a class="btn btn-link btn-xs"
 							th:href="@{/titulos/editar/{id}(id=${titulo.id})}" title="Editar"
-							data-bs-placement="top" rel="tooltip"> 
-							<img src="/images/edit-24px.svg">
-						</a> 
-						<a class="btn btn-link btn-xs" data-bs-toggle="modal"
+							data-bs-placement="top" rel="tooltip"> <img
+								src="/images/edit-24px.svg">
+						</a> <a class="btn btn-link btn-xs" data-bs-toggle="modal"
 							data-bs-target="#ModalExcluir"
 							th:attr="data-id=${titulo.id}, data-descricao=${titulo.descricao}"
-							title="Deletar" rel="tooltip" data-bs-placement="top"> 
-							<img src="/images/delete-24px.svg">
+							title="Deletar" rel="tooltip" data-bs-placement="top"> <img
+								src="/images/delete-24px.svg">
 						</a></td>
 					</tr>
 					<tr>

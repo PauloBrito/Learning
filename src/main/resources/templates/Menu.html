@@ -5,13 +5,13 @@
 
 <ul class="nav nav-tabs card-header-tabs" th:object="${modelView}">
 	<li class="nav-item"><a class="nav-link" href="/titulos/novo"
-		th:classappend="${pagina == 'CadastroTitulo'} ? active">Cadastrar</a></li>
+		th:classappend="${pagina == 'Cadastro de Título'} ? active">Cadastrar</a></li>
 	<li class="nav-item"><a class="nav-link" href="/titulos"
-		th:classappend="${pagina == 'PesquisarTitulo'} ? active">Pesquisar</a></li>
+		th:classappend="${pagina == 'Pesquisa de Títulos'} ? active">Pesquisar</a></li>
 	<li class="nav-item"><a class="nav-link" href="#"
-		th:classappend="${pagina == 'EditarTitulo'} ? active : disabled">Editar</a></li>
+		th:classappend="${pagina == 'Editar Título'} ? active : disabled">Editar</a></li>
 	<li class="nav-item"><a class="nav-link" href="/titulos/excluir"
-		th:classappend="${pagina == 'ExcluirTitulo'} ? active : disabled">Excluir</a></li>
+		th:classappend="${pagina == 'Excluir Título'} ? active : disabled">Excluir</a></li>
 </ul>
 
 <!--  aria-current="true" -->
