@@ -1,9 +1,12 @@
-package com.algaworks.cobranca.controller.service;
+package com.algaworks.cobranca.service;
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.algaworks.cobranca.model.StatusTitulo;
 import com.algaworks.cobranca.model.Titulo;
 import com.algaworks.cobranca.repository.Titulos;
 
@@ -27,6 +30,13 @@ public class TituloService {
 		titulos.deleteById(id);
 		
 	}
+
+	public void alterarStatus(Long id) {
+		Optional<Titulo> titulo = titulos.findById(id);
+		titulo.get().setStatus(StatusTitulo.RECEBIDO);
+		titulos.save(titulo.get());
+	}
+
 
 
 }

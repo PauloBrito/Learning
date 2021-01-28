@@ -19,4 +19,24 @@ $('#ModalExcluir').on('show.bs.modal', function(event) {
 $(function() {
 
 	$('.js-currency').maskMoney({ decimal: ',', thousands: '.', allowZero: true });
+	$('.js-atualizar-status').on('click', function(event) {
+		event.preventDefault();
+
+		var botaoReceber = $(event.currentTarget);
+		var urlReceber = botaoReceber.attr('href');
+
+		var responde = $.ajax({
+			url: urlReceber,
+			type: 'PUT'
+		});
+		responde.done(function(e) {
+		var codigoTitulo = botaoReceber.data('id');
+			$('[data-role=' + codigoTitulo + ']').html('<span class="badge rounded-pill bg-success">'+ e + '</span>');
+			botaoReceber.hide();
+		});
+		responde.fail(function(e) {
+			console.log(e);
+			alert('Erro ao alterar status do título');
+		});
+	});
 });

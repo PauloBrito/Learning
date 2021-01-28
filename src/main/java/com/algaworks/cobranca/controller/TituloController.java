@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.algaworks.cobranca.controller.service.TituloService;
+import com.algaworks.cobranca.service.TituloService;
 import com.algaworks.cobranca.model.StatusTitulo;
 import com.algaworks.cobranca.model.Titulo;
 import com.algaworks.cobranca.repository.Titulos;
@@ -75,7 +76,7 @@ public class TituloController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes attributes) {
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
-		nomePagina = "CadastroTitulo";
+		nomePagina = "Cadastro de Título";
 		if (errors.hasErrors()) {
 			modelView.addObject("pagina", nomePagina);
 			return modelView;
@@ -98,6 +99,13 @@ public class TituloController {
 	@ModelAttribute("todosStatusTitulo")
 	public List<StatusTitulo> StatusTitulo() {
 		return Arrays.asList(StatusTitulo.values());
+	}
+	
+	@RequestMapping(value = "/{id}/receber", method = RequestMethod.PUT)
+	public @ResponseBody String receber(@PathVariable Long id) {
+		//System.out.print("codigo>>>"+id);
+		tituloService.alterarStatus(id);
+		return StatusTitulo.RECEBIDO.getDescricao();
 	}
 
 }

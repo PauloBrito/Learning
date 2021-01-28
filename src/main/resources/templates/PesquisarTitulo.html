@@ -30,11 +30,11 @@
 				<thead class="table-dark">
 					<tr>
 						<th scope="col" class="text-center col-md-1">#</th>
-						<th scope="col">Descrição</th>
-						<th scope="col">Data</th>
-						<th scope="col">Valor</th>
-						<th scope="col" class="text-center col-md-2">Status</th>
-						<th scope="col"></th>
+						<th scope="col" class="text-center">Descrição</th>
+						<th scope="col" class="text-center col-md-1">Data</th>
+						<th scope="col" class="text-center col-md-2">Valor</th>
+						<th scope="col" class="text-center col-md-1">Status</th>
+						<th scope="col" class="text-center col-md-2">Ações</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,20 +42,27 @@
 						<td scope="row" class="text-center" th:text="${titulo.id}"></td>
 						<td th:text="${titulo.descricao}"></td>
 						<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
-						<td class="text-right" th:text="${{'R$ '+titulo.valor}}"></td>
-						<td class="text-center"><span class="badge rounded-pill"
-							th:text="${titulo.status.descricao}"
+						<td class="text-center" th:text="${{'R$ '+titulo.valor}}"></td>
+						<td class="text-center" th:attr="data-role=${titulo.id}">
+						<span class="badge rounded-pill" th:text="${titulo.status.descricao}"
 							th:classappend="${titulo.isPendente ? 'bg-danger': titulo.isRecebido ? 'bg-success': 'bg-warning text-dark'}"></span></td>
-						<td class="text-center"><a class="btn btn-link btn-xs"
+						<td class="text-center">
+						<a class="btn btn-link btn-xs"
 							th:href="@{/titulos/editar/{id}(id=${titulo.id})}" title="Editar"
-							data-bs-placement="top" rel="tooltip"> <img
-								src="/images/edit-24px.svg">
-						</a> <a class="btn btn-link btn-xs" data-bs-toggle="modal"
+							data-bs-placement="top" rel="tooltip"> 
+							<img src="/images/edit-24px.svg">
+						</a> 
+						<a class="btn btn-link btn-xs" data-bs-toggle="modal"
 							data-bs-target="#ModalExcluir"
 							th:attr="data-id=${titulo.id}, data-descricao=${titulo.descricao}"
-							title="Deletar" rel="tooltip" data-bs-placement="top"> <img
-								src="/images/delete-24px.svg">
-						</a></td>
+							title="Deletar" rel="tooltip" data-bs-placement="top"> 
+							<img src="/images/delete-24px.svg">
+						</a>
+						<a class="btn btn-link btn-xs js-atualizar-status" th:attr="data-id=${titulo.id}" th:if="${titulo.isPendente}" title="Receber"
+							data-bs-placement="top" rel="tooltip" th:href="@{/titulos/{id}/receber(id=${titulo.id})}"> 
+							<img src="/images/add_task-24px.svg" >
+						</a> 
+						</td>
 					</tr>
 					<tr>
 						<td colspan="6" th:if="${#lists.isEmpty(todosTitulos)}">Nenhum
@@ -66,7 +73,7 @@
 				</tbody>
 			</table>
 			<div layout:insert="DialogoExcluir"></div>
-			<script src="/js/cobranca.js"></script>
+
 
 		</div>
 	</div>

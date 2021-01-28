@@ -6,4 +6,5 @@ import com.algaworks.cobranca.model.Titulo;
 
 public interface Titulos extends JpaRepository<Titulo, Long>{
 
+
 }
