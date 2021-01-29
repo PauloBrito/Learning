@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -44,6 +45,7 @@ public class TituloController {
 
 	@RequestMapping(value = "/excluir/{id}", method = RequestMethod.POST)
 	public String excluir(@PathVariable Long id, RedirectAttributes attributes) {
+		System.out.println("Excluindo");
 
 		tituloService.excluir(id);	
 
@@ -54,10 +56,10 @@ public class TituloController {
 	}
 
 	@RequestMapping
-	public ModelAndView pesquisar() {
+	public ModelAndView pesquisar(@RequestParam(defaultValue = "") String descricao) {
 		ModelAndView modelView = new ModelAndView("PesquisarTitulo");
 
-		List<Titulo> todosTitulos = titulos.findAll();
+		List<Titulo> todosTitulos = titulos.findByDescricaoContaining(descricao);
 		nomePagina = "Pesquisa de Títulos";
 		modelView.addObject("pagina", nomePagina);
 		modelView.addObject("todosTitulos", todosTitulos);
@@ -66,6 +68,7 @@ public class TituloController {
 
 	@RequestMapping("/editar/{id}")
 	public ModelAndView edidar(@PathVariable("id") Titulo titulo) {
+		System.out.println("Editando");
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
 		nomePagina = "Editar Título";
 		modelView.addObject("pagina", nomePagina);
@@ -75,6 +78,7 @@ public class TituloController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes attributes) {
+		System.out.println("Salvando");
 		ModelAndView modelView = new ModelAndView("CadastroTitulo");
 		nomePagina = "Cadastro de Título";
 		if (errors.hasErrors()) {
